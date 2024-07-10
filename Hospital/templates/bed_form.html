@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add/Edit Bed</title>
+    <style>
+                body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table td {
+            padding: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4CAF50;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], input[type="time"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            table, tr, td {
+                display: block;
+                width: 100%;
+            }
+
+            td {
+                margin-bottom: 10px;
+            }
+
+            td label {
+                margin-bottom: 5px;
+            }
+
+            td input[type="text"], td input[type="email"], td input[type="date"], td input[type="time"], td select, td textarea {
+                width: calc(100% - 20px);
+            }
+
+            td button {
+                width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>{% if bed %}Edit{% else %}Add{% endif %} Bed</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <table>
+            <tr>
+                <td><label for="isAvailable">Available:</label></td>
+                <td><input type="checkbox" id="isAvailable" name="isAvailable" {% if bed and bed.isAvailable %}checked{% endif %}></td>
+            </tr>
+
+            <tr>
+                <td><label for="room">Room:</label></td>
+                <td>
+                    <select id="room" name="room">
+                    {% for room in rooms %}
+                    <option value="{{ room.pk }}" {% if bed and bed.room.pk == room.pk %}selected{% endif %}>{{ room.roomNumber }}</option>
+                    {% endfor %}
+                </select>
+                </td>
+            </tr>
+            
+            <tr>
+                <td><label for="ward">Ward:</label></td>
+                <td>
+                    <select id="ward" name="ward">
+                    {% for ward in wards %}
+                    <option value="{{ ward.pk }}" {% if bed and bed.ward.pk == ward.pk %}selected{% endif %}>{{ ward.wardType }}</option>
+                    {% endfor %}
+                </select>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">{% if bed %}Update{% else %}Add{% endif %}</button>
+        <a href="{% url 'bed_list' %}" class="back-link">Back</a>
+    </form>
+    
+</body>
+</html>

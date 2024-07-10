@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 0.5rem 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #575757;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        h1, h2 {
+            margin-bottom: 1rem;
+        }
+
+        .department-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .department-box {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .department-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .header-img, .quote-img {
+            width: 30%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem 0;
+            background-color: #4CAF50;
+            color: white;
+            width: 100%;
+            
+        }
+
+
+        .footer-left, .footer-right, .footer-center {
+            flex: 1;
+            text-align: center;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .footer-center {
+            text-align: center;
+        }
+
+        .footer-center p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .department-grid {
+                grid-template-columns: 1fr;
+            }
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-form input, .search-form button {
+                width: 100%;
+                margin: 0.25rem 0;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-left, .footer-right, .footer-center {
+                flex: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="container">
+            <h1>Hospital Management System</h1>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <a href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+            <a href="{% url 'ward_list' %}"><i class="fas fa-hospital"></i> Wards</a>
+            <a href="{% url 'room_list' %}"><i class="fas fa-procedures"></i> Rooms</a>
+            <a href="{% url 'bed_list' %}"><i class="fas fa-bed"></i> Beds</a>
+            <a href="{% url 'patient_list' %}"><i class="fas fa-user-injured"></i> Patients</a>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div style="display: flex; justify-content: space-around;">
+                <img src="{% static 'images/Life_image.jpg' %}" alt="Hospital Logo" class="header-img">
+                <img src="{% static 'images/oneLife_protectIt.jpg' %}" alt="Hospital Quote" class="quote-img">
+                <img src="{% static 'images/HospitalWallpaper.jpg' %}" alt="Hospital Quote" class="quote-img">
+            </div>
+            <h2>Departments</h2>
+            <div class="department-grid">
+                <div class="department-box">General</div>
+                <div class="department-box">Cardiology</div>
+                <div class="department-box">Pediatrics</div>
+                <div class="department-box">Critical Care</div>
+                <div class="department-box">Infertility</div>
+                <div class="department-box">Gynecology</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-left">
+                <p>psa@groupofhospitals.org</p>
+            </div>
+            <div class="footer-center">
+                <p>New street, Adayar, Chennai</p>
+            </div>
+            <div class="footer-right">
+                <p>psacare@gmail.com | 23568 15975 | 044 - 135682 </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
